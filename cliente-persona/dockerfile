@@ -1,0 +1,5 @@
+FROM openjdk:21-jdk-slim
+WORKDIR /app
+COPY target/devsu-gabo.jar /app/devsu-gabo.jar
+EXPOSE 8080
+CMD ["java", "-jar", "devsu-gabo.jar"]
