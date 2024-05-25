@@ -1,19 +1,54 @@
-version: '3.8'
+version: '3.9'
 
 services:
-  cliente-persona:
-    build: ./cliente-persona
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    restart: always  
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: banco
+      MYSQL_USER: user
+      MYSQL_PASSWORD: prueba
+      MYSQL_ROOT_HOST: '%'
+    volumes:
+      - ./sql-scripts:/docker-entrypoint-initdb.d  
     ports:
-      - "8081:8080"
+      - "3307:3306"
     networks:
       - spring-net
 
-  cuenta-movimiento:
-    build: ./cuenta-movimiento
+  cliente-persona:
+    build:
+      context: ./cliente-persona
+      dockerfile: Dockerfile
     ports:
-      - "8082:8080"
+      - "8081:8080"
+    depends_on:
+      - mysql
     networks:
       - spring-net
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/banco
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: prueba
+
+
+  cuenta-movimiento:
+    build:
+      context: ./cuenta-movimiento
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8080"
+    depends_on:
+      - mysql
+    networks:
+      - spring-net
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/banco
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: prueba
+      SPRING_URL_CLIENTE: http://cliente-persona:8081/cliente  
 
 networks:
   spring-net:

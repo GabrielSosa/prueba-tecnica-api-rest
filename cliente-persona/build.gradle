@@ -29,6 +29,11 @@ dependencies {
 
     implementation("com.fasterxml.jackson.core:jackson-databind")
 
+    // KARATE
+    testImplementation 'com.intuit.karate:karate-junit5:1.4.1'
+    implementation 'com.intuit.karate:karate-core:1.4.1'
+
+
 }
 
 test {
