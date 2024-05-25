@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  cliente-persona:
+    build: ./cliente-persona
+    ports:
+      - "8081:8080"
+    networks:
+      - spring-net
+
+  cuenta-movimiento:
+    build: ./cuenta-movimiento
+    ports:
+      - "8082:8080"
+    networks:
+      - spring-net
+
+networks:
+  spring-net:
+    driver: bridge

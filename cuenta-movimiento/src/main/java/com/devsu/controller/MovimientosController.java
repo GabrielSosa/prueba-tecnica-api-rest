@@ -135,7 +135,7 @@ public class MovimientosController {
         Movimientos updatedMovimiento = movimientosService.save(existingMovimiento);
         return ResponseEntity.ok(updatedMovimiento);
     }
-    
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteMovimientos(@PathVariable Long id) {
         if (!movimientosService.findById(id).isPresent()) {

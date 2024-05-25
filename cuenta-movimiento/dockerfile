@@ -1,5 +1,5 @@
-FROM openjdk:21-jdk-slim
-WORKDIR /app
-COPY target/cuenta-movimiento.jar /app/cuenta-movimiento.jar
-EXPOSE 8080
-CMD ["java", "-jar", "cuenta-movimiento.jar"]
+FROM openjdk:23-slim
+VOLUME /tmp
+ARG JAR_FILE=build/libs/*.jar
+COPY ${JAR_FILE} cuenta-movimientos.jar
+ENTRYPOINT ["java", "-jar", "/cuenta-movimientos.jar"]
