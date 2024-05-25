@@ -1,4 +1,7 @@
-# Compiled class file
+# quitar gradle
+*.gradlew
+
+# IDE
 *.idea
 
 # Compiled class file
