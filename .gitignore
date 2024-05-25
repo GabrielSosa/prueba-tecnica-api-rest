@@ -1,5 +1,5 @@
 # quitar gradle
-*.gradlew
+*.gradle
 
 # IDE
 *.idea
