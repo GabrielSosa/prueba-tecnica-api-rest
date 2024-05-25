@@ -1,4 +1,5 @@
-# quitar gradle
+# quitar archivos
+*.env
 *.gradle
 
 # IDE
