@@ -1,4 +1,5 @@
 # quitar archivos
+*.DS_Store
 *.env
 *.gradle
 
