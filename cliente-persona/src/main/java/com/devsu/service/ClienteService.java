@@ -54,6 +54,12 @@ public class ClienteService {
         }
     }*/
 
+    public List<Cliente> obtenerTodosLosClientesActivos() {
+        return clienteRepository.findByEstadoTrue();
+    }
+    public Optional<Cliente> obtenerClienteActivoPorId(Long id) {
+        return clienteRepository.findClienteByIdAndEstadoTrue(id);
+    }
     public void eliminarCliente(Long id) {
         if (clienteRepository.existsById(id)) {
             clienteRepository.deleteById(id);

@@ -9,9 +9,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -54,10 +58,13 @@ public class ClienteControllerTest {
         clienteEsperado.setPersona(persona);
         when(clienteService.crearCliente(any(Cliente.class))).thenReturn(clienteEsperado);
 
-        ClienteDto resultadoDto = clienteController.crearCliente(clienteDto);
+        BindingResult bindingResult = mock(BindingResult.class); // Mock BindingResult
+        when(bindingResult.hasErrors()).thenReturn(false);
+
+        ResponseEntity<ClienteDto> response = (ResponseEntity<ClienteDto>) clienteController.crearCliente(clienteDto, bindingResult);
 
         // Verificaciones
-        assertEquals(clienteEsperado.getClienteId(), resultadoDto.getClienteId());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
 }

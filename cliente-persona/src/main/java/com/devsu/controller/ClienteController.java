@@ -4,9 +4,11 @@ import com.devsu.domain.Cliente;
 import com.devsu.domain.Persona;
 import com.devsu.dto.ClienteDto;
 import com.devsu.service.ClienteService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Field;
@@ -25,7 +27,7 @@ public class ClienteController {
     // GET: Obtener todos los clientes
     @GetMapping
     public List<ClienteDto> obtenerTodosLosClientes() {
-        return clienteService.obtenerTodosLosClientes().stream().
+        return clienteService.obtenerTodosLosClientesActivos().stream().
                 map(this::convertToDto).collect(Collectors.toList());
 
     }
@@ -33,21 +35,28 @@ public class ClienteController {
     // GET: Obtener cliente por ID
     @GetMapping("/{id}")
     public ResponseEntity<ClienteDto> obtenerClientePorId(@PathVariable Long id) {
-        return clienteService.obtenerClientePorId(id)
+        return clienteService.obtenerClienteActivoPorId(id)
                 .map(cliente -> ResponseEntity.ok(convertToDto(cliente)))
                 .orElse(ResponseEntity.notFound().build());
     }
 
     // POST: Crear un nuevo cliente
     @PostMapping
-    public ClienteDto crearCliente(@RequestBody ClienteDto clienteDto) {
+    public ResponseEntity<?> crearCliente(@Valid @RequestBody ClienteDto clienteDto, BindingResult result) {
+        if (result.hasErrors()) {
+            return ResponseEntity.badRequest().body(result.getAllErrors());
+        }
         Cliente cliente = convertToEntity(clienteDto);
-        return convertToDto(clienteService.crearCliente(cliente));
+        return ResponseEntity.ok(convertToDto(clienteService.crearCliente(cliente)));
+
     }
 
     // PUT: Actualizar un cliente existente
     @PutMapping("/{id}")
-    public ResponseEntity<ClienteDto> updateCliente(@PathVariable Long id, @RequestBody ClienteDto clienteDto) {
+    public ResponseEntity<?> updateCliente(@PathVariable Long id, @RequestBody ClienteDto clienteDto, BindingResult result) {
+        if (result.hasErrors()) {
+            return ResponseEntity.badRequest().body(result.getAllErrors());
+        }
         return clienteService.obtenerClientePorId(id)
                 .map(cliente -> {
                     cliente.setContrasena(clienteDto.getContrasena());
@@ -66,7 +75,7 @@ public class ClienteController {
 
     // PATCH: Actualizar parcialmente un cliente
     @PatchMapping("/{id}")
-    public ResponseEntity<ClienteDto> updatePartialCliente(@PathVariable Long id, @RequestBody Map<String, Object> updates) {
+    public ResponseEntity<?> updatePartialCliente(@PathVariable Long id, @RequestBody Map<String, Object> updates) {
         Optional<Cliente> clienteOptional = clienteService.obtenerClientePorId(id);
 
         if (!clienteOptional.isPresent()) {
@@ -115,9 +124,20 @@ public class ClienteController {
 
     // DELETE: Eliminar un cliente
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminarCliente(@PathVariable Long id) {
-        clienteService.eliminarCliente(id);
+    public ResponseEntity<?> eliminarCliente(@PathVariable Long id) {
+        Optional<Cliente> clienteOptional = clienteService.obtenerClientePorId(id);
+
+        if (!clienteOptional.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Cliente cliente = clienteOptional.get();
+        cliente.setEstado(false);
+        clienteService.crearCliente(cliente);
+
         return ResponseEntity.noContent().build();
+        //clienteService.eliminarCliente(id);
+        //return ResponseEntity.noContent().build();
     }
 
     private ClienteDto convertToDto(Cliente cliente) {
