@@ -17,6 +17,12 @@ services:
       - "3307:3306"
     networks:
       - spring-net
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root -proot || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
 
   cliente-persona:
     build:
@@ -25,14 +31,14 @@ services:
     ports:
       - "8081:8080"
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
     networks:
       - spring-net
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/banco
       SPRING_DATASOURCE_USERNAME: user
       SPRING_DATASOURCE_PASSWORD: prueba
-
 
   cuenta-movimiento:
     build:
@@ -41,15 +47,16 @@ services:
     ports:
       - "8082:8080"
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
     networks:
       - spring-net
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/banco
       SPRING_DATASOURCE_USERNAME: user
       SPRING_DATASOURCE_PASSWORD: prueba
-      SPRING_URL_CLIENTE: http://cliente-persona:8081/cliente  
-
+      SPRING_URL_CLIENTE: http://cliente-persona:8081/SPRING_URL_CLIENTE
+      
 networks:
   spring-net:
     driver: bridge

@@ -1,0 +1,6 @@
+{
+  "timestamp": "#string",
+  "status": 500,
+  "error": "#string",
+  "path": "#string"
+}

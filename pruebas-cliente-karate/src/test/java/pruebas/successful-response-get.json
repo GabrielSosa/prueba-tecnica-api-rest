@@ -1,0 +1,11 @@
+{
+  "clienteId": "#number",
+  "contrasena": "#string",
+  "estado": true,
+  "nombre": "#string",
+  "genero": "#string",
+  "edad": "#number",
+  "identificacion": "#string",
+  "direccion": "#string",
+  "telefono": "#string"
+}

@@ -74,6 +74,16 @@ Los servicios están conectados a una red de Docker llamada `spring-net` para pe
     ```sh
     chmod +x gradlew
     ```
+##  Prueba para automatizar pruebas QA con el framework de Karate
+
+Se debe tener corriendo en docker compose y el comando para ejecutar las pruebas son:
+
+## Comando para ejecutar pruebas
+
+```gradle
+gradlew clean test -i
+```
+
 
 ## Autor
 
