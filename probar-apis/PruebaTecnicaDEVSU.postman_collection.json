@@ -17,7 +17,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"contrasena\": \"securePassword\",\n    \"estado\": true,\n    \"nombre\": \"John Doe\",\n    \"genero\": \"Masculino\",\n    \"edad\": 35,\n    \"identificacion\": \"12345678920\",\n    \"direccion\": \"123 Main Street\",\n    \"telefono\": \"555-1212\"\n}",
+							"raw": "{\n    \"contrasena\": \"jjhhh\",\n    \"estado\": true,\n    \"nombre\": \"omar Doe\",\n    \"genero\": \"Masculino\",\n    \"edad\": 35,\n    \"identificacion\": \"976\",\n    \"direccion\": \"123 Main Street\",\n    \"telefono\": \"555-1212\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -25,12 +25,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://{{IP}}:8081/cliente",
+							"raw": "http://{{IP}}:{{PUERTO_CLIENTE}}/cliente",
 							"protocol": "http",
 							"host": [
 								"{{IP}}"
 							],
-							"port": "8081",
+							"port": "{{PUERTO_CLIENTE}}",
 							"path": [
 								"cliente"
 							]
@@ -53,12 +53,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://{{IP}}:8081/cliente/2",
+							"raw": "http://{{IP}}:{{PUERTO_CLIENTE}}/cliente/2",
 							"protocol": "http",
 							"host": [
 								"{{IP}}"
 							],
-							"port": "8081",
+							"port": "{{PUERTO_CLIENTE}}",
 							"path": [
 								"cliente",
 								"2"
@@ -82,13 +82,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://{{IP}}:8081/cliente/1",
+							"raw": "http://{{IP}}:{{PUERTO_CLIENTE}}//cliente/1",
 							"protocol": "http",
 							"host": [
 								"{{IP}}"
 							],
-							"port": "8081",
+							"port": "{{PUERTO_CLIENTE}}",
 							"path": [
+								"",
 								"cliente",
 								"1"
 							]
@@ -114,15 +115,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://{{IP}}:8081/cliente/1",
+							"raw": "http://{{IP}}:{{PUERTO_CLIENTE}}/cliente/5",
 							"protocol": "http",
 							"host": [
 								"{{IP}}"
 							],
-							"port": "8081",
+							"port": "{{PUERTO_CLIENTE}}",
 							"path": [
 								"cliente",
-								"1"
+								"5"
 							]
 						}
 					},
@@ -146,12 +147,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://{{IP}}:8080/cliente",
+							"raw": "http://{{IP}}:{{PUERTO_CLIENTE}}/cliente",
 							"protocol": "http",
 							"host": [
 								"{{IP}}"
 							],
-							"port": "8080",
+							"port": "{{PUERTO_CLIENTE}}",
 							"path": [
 								"cliente"
 							]
@@ -165,13 +166,13 @@
 			"name": "Cuentas",
 			"item": [
 				{
-					"name": "Insertar Cuenta",
+					"name": "Crear Cuenta",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"numeroCuenta\": \"1234567890\",\n  \"tipoCuenta\": \"Ahorros\",\n  \"saldoInicial\": 1000.00,\n  \"estado\": \"Activa\",\n  \"clienteId\": 2\n}\n",
+							"raw": "{\n  \"numeroCuenta\": \"1233\",\n  \"tipoCuenta\": \"Ahorros\",\n  \"saldoInicial\": 1000.00,\n  \"estado\": \"Activa\",\n  \"clienteId\": 4\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -179,12 +180,104 @@
 							}
 						},
 						"url": {
-							"raw": "http://{{IP}}:8082/cuentas",
+							"raw": "http://{{IP}}:{{PUERTO_CUENTAS}}/cuentas",
 							"protocol": "http",
 							"host": [
 								"{{IP}}"
 							],
-							"port": "8082",
+							"port": "{{PUERTO_CUENTAS}}",
+							"path": [
+								"cuentas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar Cuenta",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"tipoCuenta\": \"Plazo fijo\",\n  \"saldoInicial\": 1000.00,\n  \"estado\": \"Activa\",\n  \"clienteId\": 4\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{PUERTO_CUENTAS}}/cuentas/1233",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{PUERTO_CUENTAS}}",
+							"path": [
+								"cuentas",
+								"1233"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BuscarNumeroCuenta",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"tipoCuenta\": \"Plazo fijo\",\n  \"saldoInicial\": 1000.00,\n  \"estado\": \"Activa\",\n  \"clienteId\": 4\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{PUERTO_CUENTAS}}/cuentas/1233",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{PUERTO_CUENTAS}}",
+							"path": [
+								"cuentas",
+								"1233"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BuscarTodasCuentas",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"tipoCuenta\": \"Plazo fijo\",\n  \"saldoInicial\": 1000.00,\n  \"estado\": \"Activa\",\n  \"clienteId\": 4\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{PUERTO_CUENTAS}}/cuentas",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{PUERTO_CUENTAS}}",
 							"path": [
 								"cuentas"
 							]
@@ -198,13 +291,13 @@
 			"name": "Movimientos",
 			"item": [
 				{
-					"name": "Insertar",
+					"name": "Realizar movimiento",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"fecha\": \"2024-05-24T10:15:30\",\n  \"tipoMovimiento\": \"Deposito\",\n  \"valor\": 500.00,\n  \"saldo\": 1500.00,\n  \"cuenta\": {\n    \"id\": 1\n  }\n}",
+							"raw": "{\n  \"fecha\": \"2024-05-24T10:15:30\",\n  \"tipoMovimiento\": \"Retiro\",\n  \"valor\": -1.00,\n  \"numeroCuenta\": \"1233\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -212,14 +305,106 @@
 							}
 						},
 						"url": {
-							"raw": "http://{{IP}}:8082/movimientos",
+							"raw": "http://{{IP}}:{{PUERTO_CUENTAS}}/movimientos",
 							"protocol": "http",
 							"host": [
 								"{{IP}}"
 							],
-							"port": "8082",
+							"port": "{{PUERTO_CUENTAS}}",
 							"path": [
 								"movimientos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar movimiento",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"fecha\": \"2024-05-24T10:15:30\",\n  \"tipoMovimiento\": \"Retiro\",\n  \"valor\": -10.00,\n  \"numeroCuenta\": \"1233\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{PUERTO_CUENTAS}}/movimientos/1",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{PUERTO_CUENTAS}}",
+							"path": [
+								"movimientos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BuscarMovimientos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"fecha\": \"2024-05-24T10:15:30\",\n  \"tipoMovimiento\": \"Retiro\",\n  \"valor\": -1.00,\n  \"numeroCuenta\": \"1233\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{PUERTO_CUENTAS}}/movimientos",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{PUERTO_CUENTAS}}",
+							"path": [
+								"movimientos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BuscarMovimientoId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"fecha\": \"2024-05-24T10:15:30\",\n  \"tipoMovimiento\": \"Retiro\",\n  \"valor\": -1.00,\n  \"numeroCuenta\": \"1233\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{PUERTO_CUENTAS}}/movimientos/1",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{PUERTO_CUENTAS}}",
+							"path": [
+								"movimientos",
+								"1"
 							]
 						}
 					},
@@ -236,12 +421,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{IP}}:8081/reportes?fechaInicio=2024-01-01T00:00:00&fechaFin=2024-12-31T23:59:59&clienteId=2",
+							"raw": "http://{{IP}}:{{PUERTO_CUENTAS}}/reportes?fechaInicio=2024-01-01T00:00:00&fechaFin=2024-12-31T23:59:59&clienteId=2",
 							"protocol": "http",
 							"host": [
 								"{{IP}}"
 							],
-							"port": "8081",
+							"port": "{{PUERTO_CUENTAS}}",
 							"path": [
 								"reportes"
 							],
@@ -265,5 +450,25 @@
 				}
 			]
 		}
-	]
+	], 
+	"variable": [
+        {
+            "key": "IP",
+            "value": "localhost",  
+            "type": "string",
+            "description": "The IP address or hostname where your APIs are running."
+        },
+        {
+            "key": "PUERTO_CLIENTE",
+            "value": "8081",
+            "type": "string",
+            "description": "The port number for the Clientes API."
+        },
+        {
+            "key": "PUERTO_CUENTAS",
+            "value": "8082",
+            "type": "string",
+            "description": "The port number for the Cuentas and Movimientos APIs."
+        }
+    ]
 }

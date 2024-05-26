@@ -1,8 +1,8 @@
 package com.devsu.service;
 
+
 import com.devsu.domain.Movimientos;
 import com.devsu.repository.MovimientosRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -21,6 +21,7 @@ public class MovimientoService {
     public Optional<Movimientos> findById(Long id) {
         return movimientosRepository.findById(id);
     }
+
 
     public Movimientos save(Movimientos movimientos) {
         return movimientosRepository.save(movimientos);

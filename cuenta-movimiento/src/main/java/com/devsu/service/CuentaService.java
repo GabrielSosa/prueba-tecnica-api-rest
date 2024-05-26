@@ -26,6 +26,10 @@ public class CuentaService {
         return cuentaRepository.save(cuenta);
     }
 
+    public Optional<Cuenta> findByNumeroCuenta(String numeroCuenta) {
+        return cuentaRepository.findByNumeroCuenta(numeroCuenta);
+    }
+
     public void deleteById(Long id) {
         cuentaRepository.deleteById(id);
     }
