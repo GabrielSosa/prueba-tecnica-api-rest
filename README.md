@@ -43,8 +43,8 @@ Si prefieres ejecutar los proyectos manualmente sin usar Docker Compose, sigue e
 
 ## Tecnologías Utilizadas
 
-- ![Java Spring Boot](https://www.vectorlogo.zone/logos/springio/springio-icon.svg) **Java Spring Boot**: Utilizado para desarrollar las aplicaciones `cliente-persona` y `cuenta-movimiento`.
-- ![MySQL](https://www.vectorlogo.zone/logos/mysql/mysql-icon.svg) **MySQL**: Base de datos utilizada para almacenar la información de las aplicaciones.
+- <img src="https://www.vectorlogo.zone/logos/springio/springio-icon.svg" alt="Java Spring Boot" width="20"/> **Java Spring Boot**: Utilizado para desarrollar las aplicaciones `cliente-persona` y `cuenta-movimiento`.
+- <img src="https://www.vectorlogo.zone/logos/mysql/mysql-icon.svg" alt="MySQL" width="20"/> **MySQL**: Base de datos utilizada para almacenar la información de las aplicaciones.
 
 ## Estructura del Proyecto
 
