@@ -1,0 +1,269 @@
+{
+	"info": {
+		"_postman_id": "e178c3cf-cb62-4987-8653-012cb0371b9f",
+		"name": "PruebaTecnicaDEVSU",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3795773",
+		"_collection_link": "https://www.postman.com/warped-meadow-667430/workspace/pruebastecnicas/collection/3795773-e178c3cf-cb62-4987-8653-012cb0371b9f?action=share&source=collection_link&creator=3795773"
+	},
+	"item": [
+		{
+			"name": "Clientes",
+			"item": [
+				{
+					"name": "CrearCliente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"contrasena\": \"securePassword\",\n    \"estado\": true,\n    \"nombre\": \"John Doe\",\n    \"genero\": \"Masculino\",\n    \"edad\": 35,\n    \"identificacion\": \"12345678920\",\n    \"direccion\": \"123 Main Street\",\n    \"telefono\": \"555-1212\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{IP}}:8081/cliente",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "8081",
+							"path": [
+								"cliente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EditarClienteParcial",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"contrasena\": \"newSecurePassword\",\n  \"telefono\": \"555-1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{IP}}:8081/cliente/2",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "8081",
+							"path": [
+								"cliente",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EditarCliente",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"clienteId\": 123,\n  \"contrasena\": \"securePassword123\",\n  \"estado\": true,\n  \"nombre\": \"John Doe\",\n  \"genero\": \"Masculino\",\n  \"edad\": 35,\n  \"identificacion\": \"1234567890\",\n  \"direccion\": \"123 Main Street\",\n  \"telefono\": \"555-12122\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{IP}}:8081/cliente/1",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "8081",
+							"path": [
+								"cliente",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener cliente Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{IP}}:8081/cliente/1",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "8081",
+							"path": [
+								"cliente",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener cliente",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{IP}}:8080/cliente",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "8080",
+							"path": [
+								"cliente"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cuentas",
+			"item": [
+				{
+					"name": "Insertar Cuenta",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"numeroCuenta\": \"1234567890\",\n  \"tipoCuenta\": \"Ahorros\",\n  \"saldoInicial\": 1000.00,\n  \"estado\": \"Activa\",\n  \"clienteId\": 2\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{IP}}:8082/cuentas",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "8082",
+							"path": [
+								"cuentas"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Movimientos",
+			"item": [
+				{
+					"name": "Insertar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"fecha\": \"2024-05-24T10:15:30\",\n  \"tipoMovimiento\": \"Deposito\",\n  \"valor\": 500.00,\n  \"saldo\": 1500.00,\n  \"cuenta\": {\n    \"id\": 1\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{IP}}:8082/movimientos",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "8082",
+							"path": [
+								"movimientos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reporte",
+			"item": [
+				{
+					"name": "Reporte",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{IP}}:8081/reportes?fechaInicio=2024-01-01T00:00:00&fechaFin=2024-12-31T23:59:59&clienteId=2",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "8081",
+							"path": [
+								"reportes"
+							],
+							"query": [
+								{
+									"key": "fechaInicio",
+									"value": "2024-01-01T00:00:00"
+								},
+								{
+									"key": "fechaFin",
+									"value": "2024-12-31T23:59:59"
+								},
+								{
+									"key": "clienteId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
